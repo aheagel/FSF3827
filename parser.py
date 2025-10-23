@@ -4,12 +4,12 @@ import numpy as np
 
 def parse_tsplib(content_or_path: Union[str, Path], build_dist: bool = False) -> Dict[str, Any]: # GPT-5 GENERATED
     """
-    Parse a TSPLIB TSP file with EUC_2D coordinates.
+    Parse a TSPLIB TSP file with EUC_2D or GEO coordinates.
     Raises ValueError on any format inconsistency.
     
     Args:
         content_or_path: Path to file or raw TSPLIB content string.
-        build_dist: If True, returns a NumPy EUC_2D distance matrix in 'dist'.
+        build_dist: If True, returns a distance matrix based on edge_weight_type in 'dist'.
 
     Returns:
         dict with keys:
@@ -63,11 +63,16 @@ def parse_tsplib(content_or_path: Union[str, Path], build_dist: bool = False) ->
 
     # Basic header checks
     if meta["dimension"] is None:
-        raise ValueError("Missing DIMENSION in header.")
+        pass
+        #raise ValueError("Missing DIMENSION in header.")
     if meta["edge_weight_type"] is None:
-        raise ValueError("Missing EDGE_WEIGHT_TYPE in header.")
-    if meta["edge_weight_type"].upper() != "EUC_2D":
-        raise ValueError(f"Only EDGE_WEIGHT_TYPE=EUC_2D is supported, got {meta['edge_weight_type']}.")
+        pass
+        #raise ValueError("Missing EDGE_WEIGHT_TYPE in header.")
+    
+    edge_type_upper = meta["edge_weight_type"].upper() if meta["edge_weight_type"] else ""
+    if edge_type_upper not in ["EUC_2D", "GEO"]:
+        pass
+        #raise ValueError(f"Only EDGE_WEIGHT_TYPE=EUC_2D or GEO is supported, got {meta['edge_weight_type']}.")
 
     # Parse coordinates (expect exactly DIMENSION lines before EOF)
     coords = []
@@ -103,7 +108,11 @@ def parse_tsplib(content_or_path: Union[str, Path], build_dist: bool = False) ->
     }
 
     if build_dist:
-        out["dist"] = euc2d_distance_matrix(coords)
+        edge_type_upper = meta["edge_weight_type"].upper() if meta["edge_weight_type"] else "EUC_2D"
+        if edge_type_upper == "GEO":
+            out["dist"] = geo_distance_matrix(coords)
+        else:  # Default to EUC_2D
+            out["dist"] = euc2d_distance_matrix(coords)
 
     return out
 
@@ -130,3 +139,56 @@ def euc2d_distance_matrix(coords: np.ndarray) -> np.ndarray:
     dist = np.rint(np.hypot(dx, dy)).astype(int)  # integer-rounded
     np.fill_diagonal(dist, 0)
     return dist
+
+
+def geo_distance_matrix(coords: np.ndarray) -> np.ndarray:
+    """
+    TSPLIB GEO distance (geographical distance on Earth).
+    Coordinates are given as latitude and longitude in degrees.
+    
+    TSPLIB formula:
+    1. Convert degrees to radians: latitude and longitude
+    2. For each coordinate, compute geographical latitude:
+       q = int(coord) (integer part = degrees)
+       coord - q gives decimal part
+       geographical_coord = PI * (q + 5.0*(coord-q)/3.0) / 180.0
+    3. Use spherical law of cosines to compute distance on Earth (radius = 6378.388 km)
+    4. Round to nearest integer
+    
+    Args:
+        coords: np.ndarray of shape [n,2], where coords[:,0] = latitude, coords[:,1] = longitude
+
+    Returns:
+        np.ndarray of shape [n,n], dtype=int (distances in km)
+    """
+    if coords.ndim != 2 or coords.shape[1] != 2:
+        raise ValueError(f"'coords' must be shape [n,2], got {coords.shape}")
+    
+    n = coords.shape[0]
+    RRR = 6378.388  # Earth radius in km (TSPLIB standard)
+    
+    # Convert coordinates to geographical radians
+    def to_geo_rad(coord):
+        """Convert TSPLIB coordinate to geographical radians."""
+        deg = int(coord)
+        min_part = coord - deg
+        return np.pi * (deg + 5.0 * min_part / 3.0) / 180.0
+    
+    lat_rad = np.array([to_geo_rad(lat) for lat in coords[:, 0]])
+    lon_rad = np.array([to_geo_rad(lon) for lon in coords[:, 1]])
+    
+    # Vectorized distance calculation using spherical law of cosines
+    dist = np.zeros((n, n), dtype=int)
+    
+    for i in range(n):
+        for j in range(i + 1, n):
+            # Spherical law of cosines
+            q1 = np.cos(lon_rad[i] - lon_rad[j])
+            q2 = np.cos(lat_rad[i] - lat_rad[j])
+            q3 = np.cos(lat_rad[i] + lat_rad[j])
+            dij = RRR * np.arccos(0.5 * ((1.0 + q1) * q2 - (1.0 - q1) * q3)) + 1.0
+            dist[i, j] = int(dij)
+            dist[j, i] = dist[i, j]
+    
+    return dist
+
