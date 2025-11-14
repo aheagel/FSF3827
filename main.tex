@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{FSF3827 Assignment 2}
+\author{Anh Do \\ 020416-2317 \\ anhd@kth.se}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+No. They never use the phrase “branch-and-bound,” and they don’t say who coined it. In their 2010 introduction, they state, "We did not initially think of the method as 'branch and bound'". They mention they aren't sure if the term was already in the literature. They describe their automatic method in terms of splitting the problem into sets of solutions by adding extra constraints, and using "upper bounds" from the linear-programming relaxation to decide what to explore or discard. The paper doesn't give us any explicit author for "branch-and-bound" other than mentioning, "Much later someone wrote a paper about ‘shoulder branch and bound’".
+
+The method selects a branching variable by finding the variable that is "furthest from an integer". After selecting a variable (like $x_r$), it "floors and ceils" it by creating two new problems: one with the new constraint that $x_r$ equals the integer just below its value (e.g., $[x_r^0]$), and one where $x_r$ equals the integer just above (e.g., $[x_r^0]+1$).
+
+It then finds the solution (the $\gamma$ value) for both of these new problems and selects the one with the largest (maximize) objective value as the new best upper bound, or $\gamma^1$. The model then continues by taking this new problem, which now has a fixed integer value for $x_r$, and repeats the process by selecting the next variable that is furthest from an integer.
+
+When an integer solution is found, it is only proven to be the optimum if its objective value is higher than the upper bounds of all other unexplored branches. The algorithm maintains a list of all potential branches and their $\gamma$ values, always exploring the one with the highest value. The computation is complete only when an integer solution is found and its $\gamma$ value is higher than any other $\gamma$ value remaining on the list.
+
+\section*{Question 2}
+Based on the survey paper, the main node selection (or search) strategies mentioned are Depth-First Search (DFS), Breadth-First Search (BrFS), Best-First Search (BFS), and Cyclic Best-First Search (CBFS). The order of exploration is important because it significantly affects computation time and memory requirements, finding a good incumbent solution early in the search allows the algorithm to prune more of the search tree, thus reducing the total number of nodes that must be explored to verify optimality.
+
+The paper discusses branching strategies, which are categorized into binary and wide branching, and also mentions specific variable selection rules for integer programming, such as pseudocost branching, strong branching, and the "most fractional" rule. However, the paper states that the "most fractional" rule is not a good strategy, noting that it is generally no better than selecting a branching variable at random in terms of computational time or the number of subproblems explored.
+
+\section*{Question 3}
+Based on the "Experiments in mixed-integer linear programming" paper, pseudo-costs are computed automatically during the branch-and-bound tree scan to measure the "importance" of each integer variable. When the algorithm branches at a node $k$ on a non-integer variable $y_b$ (which has a value $\overline{y}_{b}^{k}$ with integer part $[\overline{y}_{b}^{k}]$ and fractional part $f_b^k$), it creates a "down" node ($n+1$) and an "up" node ($n+2$). The lower pseudo-cost ($PCL_{b}$) is calculated as the change in the objective function on the down branch divided by the fractional part:
+\[
+PCL_{b} = \left| \frac{\overline{F}_{n+1} - \overline{F}_{k}}{f_{b}^{k}} \right|
+\]
+The upper pseudo-cost ($PCU_{b}$) is the change on the up branch divided by one minus the fractional part, representing the objective's deterioration per unit of change:
+\[
+PCU_{b} = \left| \frac{\overline{F}_{n+2} - \overline{F}_{k}}{1 - f_{b}^{k}} \right|
+\]
+This pseudo-cost are calculated reactively.
+
+These pseudo-costs are then used in two primary ways:
+\begin{enumerate}
+    \item \textbf{To select the next branching node (via "estimations"):} An estimation $\overline{E}_{k}$ is calculated for each waiting node to forecast the best integer solution that can be expected from it. The node with the \textit{best} (lowest) estimation is often chosen as the next node to explore. The formula is:
+    \[
+    \overline{E}_{k} = \overline{F}_{k} + \sum_{j} \min(PCL_{j} \cdot f_{j}^{k}, PCU_{j} \cdot (1-f_{j}^{k}))
+    \]
+    Here, $\overline{F}_{k}$ is the node's current objective value, and the sum represents the total \textit{estimated penalty} to get to an integer solution, optimistically assuming each variable $j$ will be branched on in its "cheaper" direction.
+
+    \item \textbf{To select the branching variable:} Once a node is selected, pseudo-costs are used to choose \textit{which} fractional variable to branch on. The goal is to select the variable that causes the "greatest expected deterioration" of the objective, which can help prune branches faster. This is done by choosing the variable $j$ that maximizes the minimum expected penalty:
+    \[
+    \max_{j} \left( \min(PCL_{j} \cdot f_{j}^{k}, PCU_{j} \cdot (1-f_{j}^{k})) \right)
+    \]
+    This rule selects the variable whose \textit{best-case} penalty (the $\min$ part) is still the \textit{worst} (the $\max$ part) among all fractional variables, thus picking the variable that is "most expensive" to make integer.
+\end{enumerate}
+
+\section*{Question 4}
+\subsection*{Strong Branching}
+Strong branching is a method for selecting a branching variable in an integer program. The core idea is to find the variable that will cause the "most change in the objective function". To do this, it runs a test: for a subset of candidate fractional variables, it temporarily solves the LP relaxation for both the "up" branch (adding $x_i \ge \lceil \overline{x}_i \rceil$) and the "down" branch (adding $x_i \le \lfloor \overline{x}_i \rfloor$). After computing these new objective values for all candidates, it permanently selects the variable that gave the "best progress" (based on a score function) to be the \textit{actual} branching variable for the current node. \textbf{Full strong branching} is when this test is performed for \textit{all} fractional variables, which often leads to small search trees but is computationally expensive.
+
+\subsection*{Reliability Branching}
+Reliability branching is a hybrid strategy that defaults to using fast \textbf{pseudocosts} but selectively uses the expensive \textbf{strong branching} calculation \textit{only} when a variable's pseudocost score is "unreliable".
+
+To be precise, the \textbf{pseudocost} (which you can think of as a better $PCU$ or 'upward' score) is the \textbf{historical average} gain for a variable. The paper calls this average $\Psi_i^+$. This average is calculated using two other values:
+\begin{itemize}
+    \item $\sigma_i^+$ is the \textbf{cumulative sum} of all \textit{individual} upward gains (specifically, the $\zeta_i^+$ values, which represent the same "per-branch" calculation as the old $PCU$ from the previous problem) from \textit{all previous encounters} where that variable was branched on.
+    \item $\eta_i^+$ is the \textbf{count} of how many times that variable has been branched on in the "up" direction.
+\end{itemize}
+The \textbf{upward pseudocost} $\Psi_i^+$ is then the average: $\Psi_i^+ = \sigma_i^+ / \eta_i^+$.
+
+Reliability branching \textbf{assesses "unreliability"} using these \textbf{counters} ($\eta_i^-$ and $\eta_i^+$) and a user-defined "reliability parameter" called $\eta_{rel}$.
+
+A variable $i$ is officially considered \textbf{unreliable} if its historical count in \textit{either} direction is less than this parameter. The exact check is:
+\[
+\min\{\eta_i^-, \eta_i^+\} < \eta_{rel}
+\]
+If a variable is deemed unreliable by this check, the algorithm will perform strong branching on it to get a high-quality objective gain value. This new result is then used to update the total sum ($\sigma_i$) and the count ($\eta_i$), making the average score ($\Psi_i^+$) more "reliable" for future decisions. If the variable's scores are already reliable (i.e., $\min\{\eta_i^-, \eta_i^+\} \ge \eta_{rel}$), the algorithm skips the expensive strong branching step and just trusts the stored pseudocost score.
+
+\section*{Question 5}
+When solving the subproblems in strong branching, other useful information is gained.
+
+First, variables can be fixed automatically. When a variable is tested, it might be found that setting it to one value (like 0) makes the problem impossible to solve, or infeasible. It is then proven that the variable must equal the other value (like 1) for any good solution. This rule can be added to the current problem without needing to branch, which makes the problem simpler and stronger.
+
+Second, a branch can be pruned immediately. Both options (like 0 and 1) are tested. If the best integer solution found so far is 194, and the test of one option (like $x=1$) shows its best possible LP value is only 190, that entire branch is known to be a dead end. That option can be discarded, and the search can be continued by forcing the other option ($x=0$).
+
+\end{document}
