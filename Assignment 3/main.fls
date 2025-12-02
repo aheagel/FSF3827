@@ -43,6 +43,14 @@ INPUT d:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
 INPUT d:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
 INPUT d:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
 INPUT d:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/float/float.sty
+INPUT d:/texlive/2025/texmf-dist/tex/latex/float/float.sty
 INPUT d:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT d:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./main.aux
@@ -96,7 +104,9 @@ INPUT d:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT d:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 OUTPUT main.pdf
 INPUT d:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT d:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT main.aux
+INPUT d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb

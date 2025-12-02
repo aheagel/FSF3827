@@ -3,6 +3,10 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{booktabs} % Required for \toprule, \midrule, \bottomrule
+\usepackage{caption}
+\usepackage{float}
+
 \geometry{a4paper, margin=1in}
 
 \title{FSF3827 Assignment 3}
@@ -64,7 +68,88 @@
     Therefore, the lifted cover cut for $C$ dominates the lifted cover cut for $C'$, making the latter weaker.
     
 \section*{Question 2}
+    \subsection*{Part 1}
+    Inital LP relaxation solution:
+    \begin{table}[H]
+        \centering
+        \caption{Optimization Results (Objective Value: 194.2)}
+        \label{tab:optimization_results}
+        \begin{tabular}{ccc}
+            \toprule
+            \textbf{Index ($i$)} & \textbf{Variable 1 ($j=1$)} & \textbf{Variable 2 ($j=2$)} \\
+            \midrule
+            1  & 0.0 & 1.0 \\
+            2  & 0.0 & 0.0 \\
+            3  & 1.0 & 0.0 \\
+            4  & 0.0 & 0.0 \\
+            5  & 1.0 & 0.0 \\
+            6  & 0.0 & 1.0 \\
+            7  & 0.0 & 1.0 \\
+            8  & 0.0 & 0.0 \\
+            9  & 0.0 & 0.0 \\
+            10 & 0.6 & 0.2 \\
+            11 & 0.0 & 0.0 \\
+            12 & 0.0 & 0.0 \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+    A minimal cover found is given by the set $C = \{3,5,10\}$ with weights $(8,11,5)$ respectively.
+    Adding the corresponding cover cut to the model and re-solving gives:
+    \begin{table}[H]
+        \centering
+        \caption{Optimization Results (Objective Value: 194.2)}
+        \label{tab:optimization_results_2}
+        \begin{tabular}{ccc}
+            \toprule
+            \textbf{Index ($i$)} & \textbf{Variable 1 ($j=1$)} & \textbf{Variable 2 ($j=2$)} \\
+            \midrule
+            1  & 0.6 & 0.4 \\
+            2  & 0.0 & 0.0 \\
+            3  & 1.0 & 0.0 \\
+            4  & 0.0 & 0.0 \\
+            5  & 1.0 & 0.0 \\
+            6  & 0.0 & 1.0 \\
+            7  & 0.0 & 1.0 \\
+            8  & 0.0 & 0.0 \\
+            9  & 0.0 & 0.0 \\
+            10 & 0.0 & 0.8 \\
+            11 & 0.0 & 0.0 \\
+            12 & 0.0 & 0.0 \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+    A second minimal cover found is given by the set $C = \{3,5,1\}$ with weights $(8,11,5)$ respectively.
+    Adding the corresponding cover cut aswell to the model and re-solving gives:
+    \begin{table}[H]
+        \centering
+        \caption{Optimization Results (Objective Value: 194.2)}
+        \label{tab:optimization_results_3}
+        \begin{tabular}{ccc}
+            \toprule
+            \textbf{Index ($i$)} & \textbf{Variable 1 ($j=1$)} & \textbf{Variable 2 ($j=2$)} \\
+            \midrule
+            1  & 1.0 & 0.0 \\
+            2  & 0.0 & 0.0 \\
+            3  & 0.0 & 1.0 \\
+            4  & 0.0 & 0.0 \\
+            5  & 1.0 & 0.0 \\
+            6  & 0.0 & 1.0 \\
+            7  & 0.6 & 0.4 \\
+            8  & 0.0 & 0.0 \\
+            9  & 0.0 & 0.0 \\
+            10 & 0.0 & 0.8 \\
+            11 & 0.0 & 0.0 \\
+            12 & 0.0 & 0.0 \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+    Which seems to not improve the objective value... The cuts seems ineffective in this case.
+
+    \subsection*{Part 2}
+    Introducing sequential lifting for the first minimal cover $C = \{3,5,10\}$, we obtain the following optimization results:
+    Doesnt seem to help either... Are our minimal covers just bad?
 \section*{Question 3}
+
 \section*{Question 4}
 
 \section*{Question 5}
