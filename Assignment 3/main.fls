@@ -1,8 +1,8 @@
-PWD c:/Users/Anh/Documents/Programming/FSF3827
+PWD c:/Users/Anh/Documents/Programming/FSF3827/Assignment 3
 INPUT d:/texlive/2025/texmf.cnf
 INPUT d:/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT d:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/Anh/Documents/Programming/FSF3827/main.tex
+INPUT c:/Users/Anh/Documents/Programming/FSF3827/Assignment 3/main.tex
 OUTPUT main.log
 INPUT d:/texlive/2025/texmf-dist/tex/latex/base/article.cls
 INPUT d:/texlive/2025/texmf-dist/tex/latex/base/article.cls

@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.30)  2 DEC 2025 11:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.30)  2 DEC 2025 11:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/Anh/Documents/Programming/FSF3827/main.tex
-(c:/Users/Anh/Documents/Programming/FSF3827/main.tex
+**"c:/Users/Anh/Documents/Programming/FSF3827/Assignment 3/main.tex"
+(c:/Users/Anh/Documents/Programming/FSF3827/Assignment 3/main.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
 (d:/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -215,7 +215,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{d:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] (./main.aux)
+{d:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
@@ -223,17 +223,17 @@ L3 programming layer <2025-11-14>
  ) 
 Here is how much of TeX's memory you used:
  3109 strings out of 467537
- 44585 string characters out of 5423703
- 465364 words of memory out of 5000000
+ 44626 string characters out of 5423703
+ 462364 words of memory out of 5000000
  32004 multiletter control sequences out of 15000+600000
  635276 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,10n,65p,263b,222s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,10n,65p,278b,222s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on main.pdf (3 pages, 123831 bytes).
+Output written on main.pdf (2 pages, 119161 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 41 compressed objects within 1 object stream
+ 66 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
