@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{FSF3827 Assignment 3}
+\author{Anh Do \\ 020416-2317 \\ anhd@kth.se}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+    \subsection*{Part 1}
+    Let $C$ be a minimal cover for the knapsack set $K$. The corresponding valid inequality (cover cut) is:
+    \[
+        \sum_{i \in C} x_i \leq |C| - 1
+    \]
+    Let $C'$ be an extension of set $C$ by a single variable, defined as $C' = C \cup \{j\}$ for some $j \notin C$. 
+    The cover cut for $C'$ is given by:
+    \begin{align*}
+        \sum_{i \in C'} x_i &= \sum_{i \in C} x_i + x_j \leq |C'| - 1 \\
+        &= \sum_{i \in C} x_i + x_j \leq |C| \\
+        \implies \quad \sum_{i \in C} x_i &\leq |C| - x_j
+    \end{align*}
+    Since $x_j \in \{0,1\}$, we observe that:
+    \[
+        \sum_{i \in C} x_i \leq |C|-1 \leq |C|-x_j
+    \]
+    Thus, the cover cut for $C$ dominates the cover cut for $C'$ because it imposes a more restrictive bound. 
+    Consequently, the cover cut for $C'$ is weaker.
+    
+    \subsection*{Part 2}
+    Lets lift a variable $x_k\notin C'$ into the cover cut for $C$. The lifted inequality is given by:
+    \[
+        \sum_{i \in C} x_i + \alpha_{k_1} x_k \leq |C| - 1
+    \]
+    Where the lifting coefficient $\alpha_{k_1}$ is defined as:
+    \[
+        \alpha_{k_1} = |C| - 1 - \max \left(\sum_{i \in C} x_i | x_k = 1, x \in \{0,1\}^n, \sum_{i \in N} a_i x_i \leq b, N=C\cup{k}\right)
+    \]
+    Similarly, we lift the same variable $x_k$ into the cover cut for $C'$. The lifted inequality can thus be expressed as:
+    \[
+        \sum_{i \in C'} x_i + \alpha_{k_2} x_k \leq |C'| - 1  \implies \sum_{i \in C} x_i + \alpha_{k_2} x_k \leq |C| - x_j
+    \]
+    Here the lifting coefficient $\alpha_{k_2}$ is defined as:
+    \begin{align*}
+        \alpha_{k_2} &= |C'| - 1 - \max \left(\sum_{i \in C'} x_i | x_k = 1, x \in \{0,1\}^n, \sum_{i \in N} a_i x_i \leq b, N=C'\cup{k}\right) \\
+        &= |C| -  \max \left(\sum_{i \in C} x_i + x_j | x_k = 1, x \in \{0,1\}^n, \sum_{i \in N} a_i x_i \leq b, N=C\cup{j}\cup{k}\right)\\
+        &\geq |C| - \max{x_j} - \max \left(\sum_{i \in C} x_i | x_k = 1, x \in \{0,1\}^n, \sum_{i \in N} a_i x_i \leq b, N=C\cup{k}\right) \\
+        &\geq |C| - 1 - \max \left(\sum_{i \in C} x_i | x_k = 1, x \in \{0,1\}^n, \sum_{i \in N} a_i x_i \leq b, N=C\cup{k}\right) \\
+        &\geq \alpha_{k_1}
+    \end{align*}
+    Thus we can see that:
+    \begin{align*}
+        \sum_{i \in C} x_i + \alpha_{k_2} x_k &\leq |C| - x_j \\
+        \implies \sum_{i \in C} x_i + \alpha_{k_1} x_k \leq \sum_{i \in C} x_i + \alpha_{k_2} x_k &\leq |C| - x_j\\
+        \implies \sum_{i \in C} x_i + \alpha_{k_1} x_k \leq \sum_{i \in C} x_i + \alpha_{k_2} x_k &\leq |C| - 1 \leq |C| - x_j
+    \end{align*}
+    
+    Therefore, the lifted cover cut for $C$ dominates the lifted cover cut for $C'$, making the latter weaker.
+    
+\section*{Question 2}
+\section*{Question 3}
+\section*{Question 4}
+
+\section*{Question 5}
+
+\end{document}
