@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.30)  2 DEC 2025 15:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.30)  3 DEC 2025 23:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -87,6 +87,41 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
+) (d:/texlive/2025/texmf-dist/tex/latex/stackengine/stackengine.sty
+Package: stackengine 2021/07/22 v4.11\ Stacking text and objects in convenient ways
+ (d:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count295
+) (d:/texlive/2025/texmf-dist/tex/generic/listofitems/listofitems.sty (d:/texlive/2025/texmf-dist/tex/generic/listofitems/listofitems.tex
+\loi_cnt_foreach_nest=\count296
+\loi_nestcnt=\count297
+)
+Package: listofitems 2024/03/09 v1.65 Grab items in lists using user-specified sep char (CT)
+) (d:/texlive/2025/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count298
+\calc@Bcount=\count299
+\calc@Adimen=\dimen158
+\calc@Bdimen=\dimen159
+\calc@Askip=\skip54
+\calc@Bskip=\skip55
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count300
+\calc@Cskip=\skip56
+)
+\c@@stackindex=\count301
+\@boxshift=\skip57
+\stack@tmplength=\skip58
+\temp@stkl=\skip59
+\@stackedboxwidth=\skip60
+\@addedbox=\box55
+\@anchorbox=\box56
+\@insetbox=\box57
+\se@backgroundbox=\box58
+\stackedbox=\box59
+\@centerbox=\box60
+\c@ROWcellindex@=\count302
 ) (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
  (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -112,8 +147,8 @@ Package graphics Info: Driver file: pdftex.def on input line 106.
  (d:/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen158
-\Gin@req@width=\dimen159
+\Gin@req@height=\dimen160
+\Gin@req@width=\dimen161
 ) (d:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (d:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
@@ -121,92 +156,108 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
  (d:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
-\Gm@cnth=\count295
-\Gm@cntv=\count296
-\c@Gm@tempcnt=\count297
-\Gm@bindingoffset=\dimen160
-\Gm@wd@mp=\dimen161
-\Gm@odd@mp=\dimen162
-\Gm@even@mp=\dimen163
-\Gm@layoutwidth=\dimen164
-\Gm@layoutheight=\dimen165
-\Gm@layouthoffset=\dimen166
-\Gm@layoutvoffset=\dimen167
+\Gm@cnth=\count303
+\Gm@cntv=\count304
+\c@Gm@tempcnt=\count305
+\Gm@bindingoffset=\dimen162
+\Gm@wd@mp=\dimen163
+\Gm@odd@mp=\dimen164
+\Gm@even@mp=\dimen165
+\Gm@layoutwidth=\dimen166
+\Gm@layoutheight=\dimen167
+\Gm@layouthoffset=\dimen168
+\Gm@layoutvoffset=\dimen169
 \Gm@dimlist=\toks23
 ) (d:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen168
-\lightrulewidth=\dimen169
-\cmidrulewidth=\dimen170
-\belowrulesep=\dimen171
-\belowbottomsep=\dimen172
-\aboverulesep=\dimen173
-\abovetopsep=\dimen174
-\cmidrulesep=\dimen175
-\cmidrulekern=\dimen176
-\defaultaddspace=\dimen177
-\@cmidla=\count298
-\@cmidlb=\count299
-\@aboverulesep=\dimen178
-\@belowrulesep=\dimen179
-\@thisruleclass=\count300
-\@lastruleclass=\count301
-\@thisrulewidth=\dimen180
+\heavyrulewidth=\dimen170
+\lightrulewidth=\dimen171
+\cmidrulewidth=\dimen172
+\belowrulesep=\dimen173
+\belowbottomsep=\dimen174
+\aboverulesep=\dimen175
+\abovetopsep=\dimen176
+\cmidrulesep=\dimen177
+\cmidrulekern=\dimen178
+\defaultaddspace=\dimen179
+\@cmidla=\count306
+\@cmidlb=\count307
+\@aboverulesep=\dimen180
+\@belowrulesep=\dimen181
+\@thisruleclass=\count308
+\@lastruleclass=\count309
+\@thisrulewidth=\dimen182
 ) (d:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
  (d:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen181
-\captionmargin=\dimen182
-\caption@leftmargin=\dimen183
-\caption@rightmargin=\dimen184
-\caption@width=\dimen185
-\caption@indent=\dimen186
-\caption@parindent=\dimen187
-\caption@hangindent=\dimen188
+\caption@tempdima=\dimen183
+\captionmargin=\dimen184
+\caption@leftmargin=\dimen185
+\caption@rightmargin=\dimen186
+\caption@width=\dimen187
+\caption@indent=\dimen188
+\caption@parindent=\dimen189
+\caption@hangindent=\dimen190
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count302
-\c@continuedfloat=\count303
+\c@caption@flags=\count310
+\c@continuedfloat=\count311
 ) (d:/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count304
+\c@float@type=\count312
 \float@exts=\toks24
-\float@box=\box55
+\float@box=\box61
 \@float@everytoks=\toks25
-\@floatcapt=\box56
+\@floatcapt=\box62
+) (d:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 ) (d:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count305
+\l__color_backend_stack_int=\count313
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
  (d:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count306
-\scratchdimen=\dimen189
-\scratchbox=\box57
-\nofMPsegments=\count307
-\nofMParguments=\count308
+\scratchcounter=\count314
+\scratchdimen=\dimen191
+\scratchbox=\box63
+\nofMPsegments=\count315
+\nofMParguments=\count316
 \everyMPshowfont=\toks26
-\MPscratchCnt=\count309
-\MPscratchDim=\dimen190
-\MPnumerator=\count310
-\makeMPintoPDFobject=\count311
+\MPscratchCnt=\count317
+\MPscratchDim=\dimen192
+\MPnumerator=\count318
+\makeMPintoPDFobject=\count319
 \everyMPtoPDFconversion=\toks27
 ) (d:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -251,34 +302,39 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 18.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 19.
 (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 19.
  (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{d:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] (./main.aux)
+{d:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+Overfull \hbox (2.54146pt too wide) detected at line 185
+[]
+ []
+
+[4] [5] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4604 strings out of 467537
- 72884 string characters out of 5423703
- 492064 words of memory out of 5000000
- 33483 multiletter control sequences out of 15000+600000
+ 5808 strings out of 467537
+ 89794 string characters out of 5423703
+ 527061 words of memory out of 5000000
+ 34660 multiletter control sequences out of 15000+600000
  635584 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,10n,65p,294b,307s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on main.pdf (3 pages, 137160 bytes).
+ 57i,16n,65p,321b,322s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (5 pages, 166387 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 95 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

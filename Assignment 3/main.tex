@@ -1,11 +1,12 @@
 \documentclass{article}
-\usepackage{amsmath}
+\usepackage{amsmath,stackengine}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{booktabs} % Required for \toprule, \midrule, \bottomrule
 \usepackage{caption}
 \usepackage{float}
+\usepackage{xcolor}
 
 \geometry{a4paper, margin=1in}
 
@@ -149,6 +150,54 @@
     Introducing sequential lifting for the first minimal cover $C = \{3,5,10\}$, we obtain the following optimization results:
     Doesnt seem to help either... Are our minimal covers just bad?
 \section*{Question 3}
+We know that:
+\[
+    \sum_{i=1}^{n} a_i x_i + \sum_{g_i < 0} g_i y_i \leq \sum_{i=1}^{n} a_i x_i + \sum_{i=1}^{p} g_i y_i \leq b
+\]
+
+\begin{align*}
+    \sum_{i=1}^{n} \left( \lfloor a_i \rfloor + f_i \right) x_i + \sum_{g_i < 0} g_i y_i  &\leq \lfloor b \rfloor + f_0 \\
+    \implies \sum_{i=1}^{n} f_i x_i + \sum_{g_i < 0} g_i y_i - f_0  &\leq \lfloor b \rfloor - \sum_{i=1}^{n} \lfloor a_i \rfloor x_i
+\end{align*}
+Here we can clearly see that the RHS is an integer: 
+\[
+\color{red}{}\sum_{i=1}^{n} f_i x_i + \sum_{g_i < 0} g_i y_i - f_0  \leq K\\
+\]
+
+Thus let it be denoted as $K$ and lets see how it behaves for cases when $K \leq -1$ and $K \geq 0$.\\
+Case $K\leq -1$:
+\begin{align*}
+    \sum_{i=1}^{n} \left(f_i - f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \leq {\color{red}{}\sum_{i=1}^{n} f_i x_i + \sum_{g_i < 0} g_i y_i} &{\color{red}{}\leq K + f_0} \leq K\left(1-f_0\right)\\
+    \implies \frac{1}{1-f_0} \left( \sum_{i=1}^{n}  \left(f_i - f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \right) &\leq K\\
+\end{align*}
+This is because $ \left(f_i - f_0\right)^+ \leq f_i$, and also when $K \leq -1$ then $K + f_0 \leq K\left(1-f_0\right)$.\\
+Case $K\geq 0$:
+\begin{align*}
+    \sum_{i=1}^{n} f_i x_i + \sum_{g_i < 0} g_i y_i - f_0  &\leq K \\
+    \implies \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i &\leq K + f_0 \\
+\end{align*}
+Now lets split up the LHS based on the set $S = \{ i | f_i > f_0 \}$ and start with the subcase where $\sum_{i\in S} x_i \geq K+1$:
+\begin{align*}
+    \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i &= {\color{blue}{}\sum_{i \in S} \left(f_i-f_0\right) x_i + \sum_{g_i < 0} g_i y_i} \leq {\color{purple}{}\sum_{i \in S} f_i x_i + \sum_{g_i < 0} g_i y_i}\\
+    \implies {\color{blue}{}\sum_{i \in S} f_i x_i + \sum_{g_i < 0} g_i y_i} &\leq K + f_0 {\color{blue}{}- f_0\left(\sum_{i \in S} x_i\right)} = K+f_0\left(1 - \sum_{i \in S} x_i\right)\\
+    \implies {\color{purple}{}\sum_{i \in S} f_i x_i + \sum_{g_i < 0} g_i y_i} &\leq K+f_0\left(1 - \sum_{i \in S} x_i\right) \leq K + f_0\left(1 - (K+1)\right) = K(1-f_0)\\
+    \implies \frac{1}{1-f_0} \left( \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \right) &\leq K\\
+\end{align*}
+For the other subcase where $\sum_{i\in S} x_i \leq K$, we have:
+\begin{align*}
+    \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i &= \underbrace{{\color{blue}{}\sum_{i \in S} \left(f_i-f_0\right) x_i + \sum_{g_i < 0} g_i y_i} < \sum_{i \in S} \left(1-f_0\right) x_i + \sum_{g_i < 0} g_i y_i}_{f_i-f_0 < 1-f_0}\\
+    \implies \frac{1}{1-f_0} \left( \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \right) &< \sum_{i \in S} x_i + \underbrace{\frac{1}{1-f_0}\sum_{g_i < 0} g_i y_i}_{\text{Negative}} \leq \sum_{i \in S} x_i \leq K\\
+    \implies \frac{1}{1-f_0} \left( \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \right) &< K\\
+\end{align*}
+Thus we can conclude that the LHS:
+\begin{align*}
+    \frac{1}{1-f_0} \left( \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \right) &\leq K &&\text{$\forall K\in \mathbb{Z}$}\\
+\end{align*}
+And thus substituting back for $K$ gives us the final valid inequality:
+\begin{align*}
+    \implies \frac{1}{1-f_0} \left( \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \right) &\leq \left\lfloor b \right\rfloor - \sum_{i=1}^{n} \left\lfloor a_i \right\rfloor x_i\\
+    \implies \sum_{i=1}^{n}\left( \lfloor a_i \rfloor  + \frac{\left(f_i-f_0\right)^+}{1-f_0} x_i \right) + \sum_{g_i < 0} \frac{g_i}{1-f_0} y_i &\leq \left\lfloor b \right\rfloor\\
+\end{align*}
 
 \section*{Question 4}
 
