@@ -147,8 +147,9 @@
     Which seems to not improve the objective value... The cuts seems ineffective in this case.
 
     \subsection*{Part 2}
-    Introducing sequential lifting for the first minimal cover $C = \{3,5,10\}$, we obtain the following optimization results:
-    Doesnt seem to help either... Are our minimal covers just bad?
+    Introducing sequential lifting for this problem seems to not improve the objective value aswell.
+    This is likely due to lifted cuts may not be strong enough, as we are only lifting one variable at a time.
+
 \section*{Question 3}
 We know that:
 \[
@@ -196,11 +197,63 @@ Thus we can conclude that the LHS:
 And thus substituting back for $K$ gives us the final valid inequality:
 \begin{align*}
     \implies \frac{1}{1-f_0} \left( \sum_{i=1}^{n} \left(f_i-f_0\right)^+ x_i + \sum_{g_i < 0} g_i y_i \right) &\leq \left\lfloor b \right\rfloor - \sum_{i=1}^{n} \left\lfloor a_i \right\rfloor x_i\\
-    \implies \sum_{i=1}^{n}\left( \lfloor a_i \rfloor  + \frac{\left(f_i-f_0\right)^+}{1-f_0} x_i \right) + \sum_{g_i < 0} \frac{g_i}{1-f_0} y_i &\leq \left\lfloor b \right\rfloor\\
+    \implies \sum_{i=1}^{n}\left( \lfloor a_i \rfloor  + \frac{\left(f_i-f_0\right)^+}{1-f_0} x_i \right) + \sum_{g_i < 0} \frac{g_i}{f_0-1} y_i &\leq \left\lfloor b \right\rfloor\\
 \end{align*}
 
 \section*{Question 4}
+    \subsection*{Part 1}
+    We have:
+    \begin{align*}
+        \sum_{i=1}^{n} a_i x_i + \sum_{i=1}^{p} g_i y_i &= b\\
+        \sum_{i=1}^{n}\left( \lfloor a_i \rfloor + f_i \right) x_i + \sum_{i=1}^{p} g_i y_i &= \lfloor b \rfloor + f_0\\
+        \implies \sum_{i=1}^{n} f_i x_i + \sum_{i=1}^{p} g_i y_i &= f_0 + \lfloor b \rfloor - \sum_{i=1}^{n} \lfloor a_i \rfloor x_i\\
+        \implies \sum_{f_i\leq f_0} f_i x_i + \sum_{f_i > f_0} \left(f_i-1\right) x_i + \sum_{i=1}^{p} g_i y_i &= f_0 +  \underbrace{\lfloor b \rfloor - \sum_{i=1}^{n} \lfloor a_i \rfloor x_i - \sum_{f_i>f_0}x_i}_{K} \\
+        \implies \sum_{f_i\leq f_0} f_i x_i - \sum_{f_i > f_0} \left(1-f_i\right) x_i + \sum_{i=1}^{p} g_i y_i &= f_0 + K\\
+    \end{align*}
+    Thus we once again get cases where $K\leq-1$ and $K\geq 0$.\\
+    Case $K\geq 0$:
+    \begin{align*}
+        \implies \sum_{f_i\leq f_0} \frac{f_i}{f_0} x_i - \sum_{f_i > f_0} \frac{\left(1-f_i\right)}{f_0} x_i + \sum_{i=1}^{p} \frac{g_i}{f_0} y_i &= 1+\frac{K}{f_0}\\
+        \implies \sum_{f_i\leq f_0} \frac{f_i}{f_0} x_i - \sum_{f_i > f_0} \frac{\left(1-f_i\right)}{f_0} x_i + \sum_{g_i<0} \frac{g_i}{f_0} y_i + \sum_{g_i>0}\frac{g_i}{f_0} y_i &\geq 1\\
+    \end{align*}
+    Case $K\leq -1$:
+    \begin{align*}
+        \implies \sum_{f_i\leq f_0} f_i x_i - \sum_{f_i > f_0} \left(1-f_i\right) x_i + \sum_{i=1}^{p} g_i y_i &= f_0 + K \leq K\left(1-f_0\right)\\
+        \implies \sum_{f_i\leq f_0} \frac{f_i}{1-f_0} x_i - \sum_{f_i > f_0} \frac{\left(1-f_i\right)}{1-f_0} x_i + \sum_{i=1}^{p} \frac{g_i}{1-f_0} y_i &\leq K \leq -1\\
+        \implies -\sum_{f_i\leq f_0} \frac{f_i}{1-f_0} x_i + \sum_{f_i > f_0} \frac{\left(1-f_i\right)}{1-f_0} x_i - \sum_{g_i<0}\frac{g_i}{1-f_0} y_i - \sum_{g_i>0} \frac{g_i}{1-f_0} y_i&\geq 1\\
+    \end{align*}
+    We can thus see that in both cases we have a linear inequality of the form:
+    \[
+        \alpha z \geq 1
+    \]
+    Which implies that $\max(\alpha_1^i, \alpha_2^i) \cdot z^i \geq 1$, where $\alpha_1^i$ and $\alpha_2^i$ are the coefficients from the two cases above respectively and the superscript $i$ correspond to a coefficient in the system. 
+    Thus we can combine them to get the final valid inequality:
+    \begin{align*}
+        \sum_{f_i\leq f_0} \frac{f_i}{f_0} x_i + \sum_{f_i > f_0} \frac{\left(1-f_i\right)}{1-f_0} x_i - \sum_{g_i<0}\frac{g_i}{1-f_0} y_i + \sum_{g_i>0}\frac{g_i}{f_0} y_i &\geq 1\\
+        \sum_{f_i\leq f_0} \frac{f_i}{f_0} x_i + \sum_{f_i > f_0} \frac{1-f_i}{1-f_0} x_i + \sum_{g_i>0}\frac{g_i}{f_0} y_i - \sum_{g_i<0}\frac{g_i}{1-f_0} y_i &\geq 1\\
+    \end{align*}
+
+    \subsection*{Part 2}
+    Based on Section 4.9, intersection cuts provide a geometric approach to generating valid inequalities for mixed integer linear programs. 
+    The process begins by analyzing the corner polyhedron, which is a simplified view of the problem's feasible region. 
+    To create this, we take the optimal solution to the linear relaxation, denoted as $\bar{x}$, and ignore the non-negativity constraints on the basic variables. 
+    This leaves us with a cone-like shape where the fractional solution $\bar{x}$ sits at the vertex, formed by the constraints that are active at that point.
+
+    Because $\bar{x}$ is fractional (not an integer), it falls into a ``forbidden'' gap known as a split disjunction. 
+    This is a region defined by two parallel hyperplanes, such as $\pi x \le \pi_0$ and $\pi x \ge \pi_0 + 1$. 
+    The space between these planes contains $\bar{x}$ but cannot contain any valid integer solutions.
+
+    To generate the cut, we examine the rays (directions denoted as $r^j$) that extend outward from the vertex $\bar{x}$ along the edges of the cone. 
+    For each ray, we calculate a distance scalar $\alpha_j$. This value $\alpha_j$ represents exactly how far one must travel along that specific ray to leave the forbidden region and intersect with one of the valid boundaries.
+
+    The final intersection cut is expressed as the inequality:
+    \[
+    \sum_{j \in J} \frac{x_j}{\alpha_j} \ge 1
+    \]
+    This formula dictates that to reach a valid integer solution, the non-basic variables $x_j$ must increase enough so that their weighted sum moves the point out of the forbidden gap. 
+    This effectively slices off the corner of the cone containing $\bar{x}$ while ensuring all feasible integer points remain valid.
 
 \section*{Question 5}
+Check the code. But we can see that adding the GMI cuts increases the objective value from 265.7 to 273.3 when the true optimal integer solution would yield 285.
 
 \end{document}
