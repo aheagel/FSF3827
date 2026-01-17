@@ -1,0 +1,59 @@
+\documentclass{article} % Changed from standalone to article for a full document
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath,stackengine}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{booktabs} 
+\usepackage{caption}
+\usepackage{float}
+\usepackage{xcolor}
+
+% Setup margins
+\geometry{a4paper, margin=1in}
+
+\title{FSF3827 Assignment 5}
+\author{Anh Do \\ 020416-2317 \\ anhd@kth.se}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Question 1}
+    \subsection*{Part a)}
+    We know that the ECP algorithm solves linearizations of MILP subproblems and adds invalid points as cutting plane constraints to subsequent subproblems until all constraints are satisfied. 
+    This process is guaranteed to converge to the optimal solution for convex MINLP problems because the convex function $g(x,y)$ is always underestimated by its first-order Taylor series approximation:
+    
+    $$g(x,y) \geq g(x^k,y^k) + \nabla g(x^k,y^k)^T \begin{pmatrix} x - x^k \\
+    y - y^k \end{pmatrix} \quad \forall (x,y)$$
+    
+    Thus, introducing the linearized constraint creates a valid outer approximation of the original constraint $g(x,y) \leq 0$. 
+    This means that our approximate feasible set $\hat{N}_k$ always contains the true feasible region $N$, so $N \subseteq \hat{N}_k$ for all $k$. 
+    Consequently, the optimal value $z_k$ obtained from the relaxed subproblem must be a valid lower bound to the true global optimum $z^*$, meaning $z_k \leq z^*$. 
+    To see why this sequence converges to the true optimum as $k \to \infty$, consider that our solutions $\{(x^k, y^k)\}$ are confined within a bounded search space. 
+    If the algorithm runs indefinitely, these points cannot spread out forever and must eventually accumulate near a limit point $(x^*, y^*)$. 
+    We can verify this limit point is feasible by looking at the cutting plane constraint added at step $k$, which the next solution $(x^{k+1}, y^{k+1})$ must satisfy:
+    
+    $$g(x^k, y^k) + \nabla g(x^k, y^k)^T \begin{pmatrix} x^{k+1} - x^k \\
+    y^{k+1} - y^k \end{pmatrix} \leq 0$$
+    
+    As the points bunch up near the limit, the distance between consecutive iterations approaches zero. 
+    This causes the gradient term to vanish, implying that our limit point satisfies the original constraint:$$g(x^*, y^*) + \nabla g(x^*, y^*)^T \cdot \mathbf{0} \leq 0 \implies g(x^*, y^*) \leq 0$$
+    Since we have established that the limit point is feasible and our relaxed objective values $z_k$ provided a lower bound throughout, the solution found is indeed the global optimum:
+    
+    $$\lim_{k \to \infty} z_k = z^*$$
+    
+    \subsection{Part b)}
+    Fletcher and Leyffer prove convergence by demonstrating that the algorithm never visits the same integer assignment twice, which guarantees finite termination given the assumption that the set of integer variables is finite. 
+    Their proof distinguishes between two specific cases to ensure that no cycling occurs.
+
+    First, if a chosen integer assignment results in an infeasible NLP subproblem, the algorithm solves a feasibility problem to find the point of minimum constraint violation. 
+    The proof demonstrates that the specific cut generated from this feasibility solution strictly excludes that integer assignment from being selected in any future Master Problem.
+
+    Second, if an integer assignment results in a feasible subproblem, the Master Problem is updated with an optimality cut and a strict upper bound constraint. 
+    Because the optimality cut forces the approximation variable to be greater than or equal to the actual function value, while the upper bound constraint requires it to be strictly lower, it becomes mathematically impossible for the Master Problem to select that feasible integer assignment again.
+    \end{document}
