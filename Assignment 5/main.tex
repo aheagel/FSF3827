@@ -60,4 +60,10 @@
     \subsection{code}
     See main.ipynb for the implementation of the ECP and OA algorithm with modifications for mixed-integer variables.
     The ECP was solved in under 200 iterations 
-    \end{document}
+
+
+\section*{Question 2}
+    The new problem formulation helps alot as it effectively cut out all integer assignments for $x_i$ that would lead to infeasible NLP subproblems.
+    This is because the new constraint $\sum_{i=5}^{8} z_i \leq 3$ forces the largest $x_i \leq \sqrt{3} \quad \forall i \implies x_i \in \{0,1\} \quad \forall i$, 
+\end{document}
+
