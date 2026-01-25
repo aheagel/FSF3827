@@ -47,7 +47,7 @@
     
     $$\lim_{k \to \infty} z_k = z^*$$
     
-    \subsection{Part b)}
+    \subsection*{Part b)}
     Fletcher and Leyffer prove convergence by demonstrating that the algorithm never visits the same integer assignment twice, which guarantees finite termination given the assumption that the set of integer variables is finite. 
     Their proof distinguishes between two specific cases to ensure that no cycling occurs.
 
@@ -56,14 +56,111 @@
 
     Second, if an integer assignment results in a feasible subproblem, the Master Problem is updated with an optimality cut and a strict upper bound constraint. 
     Because the optimality cut forces the approximation variable to be greater than or equal to the actual function value, while the upper bound constraint requires it to be strictly lower, it becomes mathematically impossible for the Master Problem to select that feasible integer assignment again.
-
-    \subsection{code}
+    
+    \subsection*{code}
     See main.ipynb for the implementation of the ECP and OA algorithm with modifications for mixed-integer variables.
-    The ECP was solved in under 200 iterations 
+    The ECP was solved in under 200 iterations while OA did it in 67 iterations
 
 
 \section*{Question 2}
     The new problem formulation helps alot as it effectively cut out all integer assignments for $x_i$ that would lead to infeasible NLP subproblems.
     This is because the new constraint $\sum_{i=5}^{8} z_i \leq 3$ forces the largest $x_i \leq \sqrt{3} \quad \forall i \implies x_i \in \{0,1\} \quad \forall i$, 
+
+    Thus, ECP only needed 14 iterations to converge to the optimal solution, while OA only needing 5.
+
+\section*{Question 3}
+    \subsection*{a)}
+    Given the equation:
+    \begin{align*}
+    \text{minimize} \quad & (x_1 + x_2)^2 - x_2x_3 - 0.25x_4^2 + x_4x_5 \\
+    \text{subject to} \quad & x_1 + x_2 + x_3 + x_4 + x_5 \leq 7.5, \\
+    & x_1 + x_5 \geq 2, \\
+    & x_1 + x_4 \geq 1, \\
+    & x_2 + 0.25x_3 \leq 2.5, \\
+    & 0 \leq x_i \leq 3, \quad i = 1, \ldots, 5.
+    \end{align*}
+    this can be expanded to the following equivalent form:
+    \begin{align*}
+    \text{minimize} \quad & x_1^2 + 2x_1x_2 + x_2^2 - x_2x_3 - 0.25x_4^2 + x_4x_5 \\
+    \text{subject to} \quad & x_1 + x_2 + x_3 + x_4 + x_5 \leq 7.5, \\
+    & x_1 + x_5 \geq 2, \\
+    & x_1 + x_4 \geq 1, \\
+    & x_2 + 0.25x_3 \leq 2.5, \\
+    & 0 \leq x_i \leq 3, \quad i = 1, \ldots, 5.
+    \end{align*}
+    then lets extract and isolate the non-convex terms:
+    \begin{align*}
+    \text{minimize} \quad & x_1^2 + 2y_1 + x_2^2 + y_2 + 0.25z + y_3 \\
+    \text{subject to} \quad & x_1 + x_2 + x_3 + x_4 + x_5 \leq 7.5, \\
+    & x_1 + x_5 \geq 2, \\
+    & x_1 + x_4 \geq 1, \\
+    & x_2 + 0.25x_3 \leq 2.5, \\
+    & y_1 = x_1x_2, \\
+    & y_2 = -x_2x_3, \\
+    & z = -x_4^2, \\
+    & y_3 = x_4x_5, \\
+    & 0 \leq x_i \leq 3, \quad i = 1, \ldots, 5.
+    \end{align*}
+    and now to transform this problem to a convex relaxation, lets use Mcormick envelopes to relax / linearize the bilinear terms and we can relax the univariate concave $z=-x_4^2$ with its secant lines passing its endpoints yielding a convex relaxation of the original problem:
+    \begin{align*}
+    \text{minimize} \quad & x_1^2 + 2y_1 + x_2^2 + y_2 + 0.25z + y_3 \\
+    \text{subject to} \quad & x_1 + x_2 + x_3 + x_4 + x_5 \leq 7.5, \\
+    & x_1 + x_5 \geq 2, \\
+    & x_1 + x_4 \geq 1, \\
+    & x_2 + 0.25x_3 \leq 2.5, \\
+    &\\
+    & y_1 \geq 0, \\
+    & y_1 \geq 3x_1 + 3x_2 - 9, \\
+    & y_1 \leq 3x_1, \\
+    & y_1 \leq 3x_2, \\
+    &\\
+    & y_2 \leq 0, \\
+    & y_2 \leq -3x_2 - 3x_3 + 9, \\
+    & y_2 \geq -3x_2, \\
+    & y_2 \geq -3x_3, \\
+    &\\
+    & z \geq -3x_4, \\
+    &\\
+    & y_3 \geq 0, \\
+    & y_3 \geq 3x_4 + 3x_5 - 9, \\
+    & y_3 \leq 3x_4, \\
+    & y_3 \leq 3x_5, \\
+    &\\
+    & 0 \leq x_i \leq 3, \quad i = 1, \ldots, 5.
+    \end{align*}
+    we can now substitute $z$ for $-3x_4$ back into the objective function to obtain the final convex relaxation:
+    \begin{align*}
+    \text{minimize} \quad & x_1^2 + 2y_1 + x_2^2 + y_2 -0.75x_4 + y_3 \\
+    \text{subject to} \quad & x_1 + x_2 + x_3 + x_4 + x_5 \leq 7.5, \\
+    & x_1 + x_5 \geq 2, \\
+    & x_1 + x_4 \geq 1, \\
+    & x_2 + 0.25x_3 \leq 2.5, \\
+    &\\
+    & y_1 \geq 0, \\
+    & y_1 \geq 3x_1 + 3x_2 - 9, \\
+    & y_1 \leq 3x_1, \\
+    & y_1 \leq 3x_2, \\
+    &\\
+    & y_2 \leq 0, \\
+    & y_2 \leq -3x_2 - 3x_3 + 9, \\
+    & y_2 \geq -3x_2, \\
+    & y_2 \geq -3x_3, \\
+    &\\
+    & y_3 \geq 0, \\
+    & y_3 \geq 3x_4 + 3x_5 - 9, \\
+    & y_3 \leq 3x_4, \\
+    & y_3 \leq 3x_5, \\
+    & 0 \leq x_i \leq 3, \quad i = 1, \ldots, 5.
+    \end{align*}
+
+    Solving the above convex relaxation yields a lower bound of -3.14 for the original non-convex problem.
+    
+    \subsection*{b)}
+    Essentially, the RLT concept allows us to generate a tight linear relaxation by moving beyond simple variable bounds and incorporating the problem's actual constraints into the relaxation process.
+    By multiplying existing constraints together or with variable bounds, we create new valid inequalities that better capture the feasible region's shape.
+    This leads to a more accurate approximation of the original non-convex problem, resulting in a tighter lower bound when we solve the relaxation.
+    In contrast, McCormick envelopes only use variable bounds to linearize bilinear terms, which can leave significant gaps between the relaxation and the true feasible region.
+    Thus, RLT leverages the problem's structure to enhance the relaxation quality beyond what McCormick envelopes alone can achieve.
+    
 \end{document}
 
